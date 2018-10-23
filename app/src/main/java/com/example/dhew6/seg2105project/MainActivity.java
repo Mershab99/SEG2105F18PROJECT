@@ -16,5 +16,7 @@ public class MainActivity extends AppCompatActivity {
         test.setText("Testing GitIgnore");
         //gitignore test
 
+        System.out.println("first commit of my branch");
+
     }
 }
