@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
         //testing gitignore
         TextView test = findViewById(R.id.testText);
         test.setText("Testing GitIgnore");
+        //gitignore test
 
     }
 }
