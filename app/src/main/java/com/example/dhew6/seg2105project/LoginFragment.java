@@ -19,6 +19,7 @@ public class LoginFragment extends Fragment {
     EditText usernameEditText, passwordEditText;
     TextView createNowTextView;
     Button loginButton;
+    public final static String EXTRA_MESSAGE="com.example.myHelloAndroid.MESSAGE";
 
     public LoginFragment() {
         // Required empty public constructor
@@ -37,7 +38,6 @@ public class LoginFragment extends Fragment {
         //listeners
         onLoginButtonPress();
         onCreateNowPress();
-
 
     }
 
@@ -65,6 +65,14 @@ public class LoginFragment extends Fragment {
                 if(usernameText.equals("") || passwordText.equals("")){
                     Toast.makeText(getActivity(), "Fill in all required fields", Toast.LENGTH_SHORT).show();
                 }
+                else {
+
+                    Intent sendMessage = new Intent(getActivity(), WelcomeScreen.class);
+                    sendMessage.putExtra("loginUsernameEditText", usernameText);
+                    startActivity(sendMessage);
+                }
+
+
                 //FOR MERSHAB: check if user is in database, if not display the toast.
                 //FOR MERSHAB: check if user has the correct password in the database, if doesn't match display toast.
                 //FOR KEITH: if it passes all checkts go to the welcom page, with the user info from the firebase
@@ -89,6 +97,9 @@ public class LoginFragment extends Fragment {
         });
 
     }
+
+
+
 
 
 }

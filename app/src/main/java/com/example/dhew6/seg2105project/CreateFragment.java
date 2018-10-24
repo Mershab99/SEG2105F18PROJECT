@@ -1,5 +1,6 @@
 package com.example.dhew6.seg2105project;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -96,6 +97,13 @@ public class CreateFragment extends Fragment {
                     passwordEditText.setText("");
                     confirmEditText.setText("");
                 }
+                else{
+                    Intent sendMessage = new Intent(getActivity(), WelcomeScreen.class);
+                    Intent sendRole = new Intent(getActivity(), WelcomeScreen.class);
+                    sendMessage.putExtra("role", type);
+                    sendMessage.putExtra("loginUsernameEditText", fullname);
+                    startActivity(sendMessage);
+                }
                 //FOR MERSHAB: CHECK IF USERNAME IS IN DB AND IF EMAIL IS IN DB.
                 //FOR KEITH: IF PASSES ALL CHECKS, SWITCH TO MAIN INTENT, WITH ALL STRINGS and CREATE THE RIGHT USER ACCORDING TO THE USERTYPE.
             }
@@ -114,5 +122,6 @@ public class CreateFragment extends Fragment {
             return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
         }
     }
+
 
 }
