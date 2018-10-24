@@ -16,7 +16,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DummyActivity"></activity>
+        <activity android:name=".WelcomeScreen"></activity>
     </application>
 
 </manifest>
