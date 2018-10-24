@@ -66,9 +66,9 @@ public class LoginFragment extends Fragment {
                     Toast.makeText(getActivity(), "Fill in all required fields", Toast.LENGTH_SHORT).show();
                 }
                 else {
-
                     Intent sendMessage = new Intent(getActivity(), WelcomeScreen.class);
                     sendMessage.putExtra("loginUsernameEditText", usernameText);
+                    getActivity().finish();
                     startActivity(sendMessage);
                 }
 

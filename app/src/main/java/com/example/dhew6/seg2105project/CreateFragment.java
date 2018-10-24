@@ -102,6 +102,7 @@ public class CreateFragment extends Fragment {
                     Intent sendRole = new Intent(getActivity(), WelcomeScreen.class);
                     sendMessage.putExtra("role", type);
                     sendMessage.putExtra("loginUsernameEditText", fullname);
+                    getActivity().finish();
                     startActivity(sendMessage);
                 }
                 //FOR MERSHAB: CHECK IF USERNAME IS IN DB AND IF EMAIL IS IN DB.
