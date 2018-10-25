@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 public class WelcomeScreen extends AppCompatActivity {
 
+    DatabaseHelper myDB;
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = new MenuInflater(getApplicationContext());
@@ -36,6 +38,8 @@ public class WelcomeScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_screen);
 
+        myDB = new DatabaseHelper(this);
+
         Intent Extra = getIntent();
         Intent Role = getIntent();
         String roleView = Extra.getStringExtra("role");
@@ -53,5 +57,6 @@ public class WelcomeScreen extends AppCompatActivity {
         startActivity(intent);
     }
 
+    // ArrayList<User> = myDB.displayAllUsers();
 
 }
