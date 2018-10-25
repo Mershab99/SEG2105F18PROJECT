@@ -23,6 +23,8 @@ public class CreateFragment extends Fragment {
     Spinner userTypeSpinner;
     TextView loginTextView;
 
+    DatabaseHelper myDB;
+
     public CreateFragment() {
         // Required empty public constructor
     }
@@ -30,6 +32,9 @@ public class CreateFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        myDB = new DatabaseHelper(getContext());
+
         //retrieving view objects
         confirmEditText = getView().findViewById(R.id.confirmEditText);
         passwordEditText = getView().findViewById(R.id.createPasswordEditText);
@@ -98,15 +103,24 @@ public class CreateFragment extends Fragment {
                     passwordEditText.setText("");
                     confirmEditText.setText("");
                 }
-                else{
+                else {
                     Intent sendMessage = new Intent(getActivity(), WelcomeScreen.class);
                     sendMessage.putExtra("role", type);
                     sendMessage.putExtra("loginUsernameEditText", fullname);
                     getActivity().finish();
                     startActivity(sendMessage);
                 }
-                //FOR MERSHAB: CHECK IF USERNAME IS IN DB AND IF EMAIL IS IN DB.
-                //FOR KEITH: IF PASSES ALL CHECKS, SWITCH TO MAIN INTENT, WITH ALL STRINGS and CREATE THE RIGHT USER ACCORDING TO THE USERTYPE.
+                //Validates username and email
+                if(myDB.validateNewUser(username,email)){
+                    //If it is valid it creates a user of the specific type
+                    if(type == "Home Owner"){
+                        myDB.createUser(fullname,password,email,User.HomeOwner);
+                    }
+                    else if(type == "Service Provider"){
+                        myDB.createUser(fullname,password,email,User.ServiceProvider);
+                    }
+                    // Switch to main intent
+                }
             }
         });
     }
