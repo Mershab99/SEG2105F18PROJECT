@@ -1,5 +1,5 @@
-# SEG2105F18PROJECT
-Repo for our 2105 Fall 2018 Project 
+#Android Project: On-Demand Home Repair Services App
+Repo for our SEG2105 Fall 2018 Project
 
 Group Members:
 Mershab Arafat,
