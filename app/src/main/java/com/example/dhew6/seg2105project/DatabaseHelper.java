@@ -23,10 +23,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "User.db";
     public static final String TABLE_NAME = "USER_TABLE";
     public static final String COL_1 ="id";
-    public static final String COL_2 ="Name";
-    public static final String COL_3 ="email";
+    public static final String COL_2 ="name";
+    public static final String COL_3 ="userName";
     public static final String COL_4 ="password";
-    public static final String COL_5 ="typeOfUser";
+    public static final String COL_5 = "email";
+    public static final String COL_6 ="typeOfUser";
 
 
     public DatabaseHelper(Context context) {
@@ -52,15 +53,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor res1 = db.rawQuery("select "+COL_2+" from " + TABLE_NAME + " WHERE " +COL_2+ "="+userName, null);
-        Cursor res2 = db.rawQuery("select "+COL_4+" from " + TABLE_NAME + " WHERE " +COL_4+ "="+email, null);
+        Cursor res1 = db.rawQuery("select "+COL_3+" from " + TABLE_NAME + " WHERE " +COL_3+ "="+userName, null);
+        Cursor res2 = db.rawQuery("select "+COL_5+" from " + TABLE_NAME + " WHERE " +COL_5+ "="+email, null);
 
-        if(res1.getCount()==0 && res2.getCount()==0){
+        if(res1.getCount()==0 && res2.getCount()==0)
             return true;
-        }
         else return false;
     }
 
+    public boolean[] validateLogin(String userName, String password){
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        boolean[] userValid = new boolean[2];
+
+        Cursor resUserName = db.rawQuery("select " + COL_3+ "from " + TABLE_NAME + "WHERE " +COL_3+ "=" +userName,null);
+        Cursor resPassword = db.rawQuery("select " + COL_4+ "from " + TABLE_NAME + "WHERE " +COL_4+ "=" +password,null);
+
+        if(resUserName.getCount() == 0)
+            userValid[0] = true;
+        if(resPassword.getCount() == 0)
+            userValid[1] = true;
+
+        return userValid;
+    }
 
     //Creates a user in the database with the given credentials
     public void createUser(String fullName, String password, String email, String userType){
@@ -72,11 +87,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         content.put(COL_3, email);
         content.put(COL_4, password);
         content.put(COL_5, userType);
+        content.put(COL_6,userType);
+
 
         db.insert(TABLE_NAME,null,content);
     }
 
-    //Outputs all the users in an arraylist
+    //Outputs all the users in an ArrayList
     public ArrayList<User> displayAllUsers(){
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -97,6 +114,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return userList;
     }
+
+    public User getUser(String userName){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor res = db.rawQuery("select * from " + TABLE_NAME+ "WHERE " +COL_3+"="+userName, null);
+
+        if(res.getString(5) == User.HomeOwner){
+            return new HomeOwner(res.getString(1),res.getString(2),res.getString(3),res.getString(4));
+
+        }
+        else if(res.getString(5) == User.ServiceProvider){
+            return new ServiceProvider(res.getString(1),res.getString(2),res.getString(3),res.getString(4));
+        }
+
+        return new User(null,null,null,null);
+
+    }
+
 
 
 
