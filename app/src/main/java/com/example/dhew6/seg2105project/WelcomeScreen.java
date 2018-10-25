@@ -13,6 +13,7 @@ import android.widget.TextView;
 public class WelcomeScreen extends AppCompatActivity {
 
     DatabaseHelper myDB;
+    TextView roleTextView, usernameTextView;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -40,22 +41,14 @@ public class WelcomeScreen extends AppCompatActivity {
 
         myDB = new DatabaseHelper(this);
 
-        Intent Extra = getIntent();
-        Intent Role = getIntent();
-        String roleView = Extra.getStringExtra("role");
-        String textView = Extra.getStringExtra("loginUsernameEditText");
+        Intent intent = getIntent();
+        String username = intent.getStringExtra("loginUsernameEditText");
 
-        TextView RoleInput = (TextView) findViewById(R.id.textView6);
-        TextView UserInput = (TextView) findViewById(R.id.textView4);
-        RoleInput.setText(roleView);
-        UserInput.setText(textView);
+        roleTextView = findViewById(R.id.roleTextView);
+        usernameTextView = findViewById(R.id.usernameTextView);
+        usernameTextView.setText(username);
     }
 
-    private void launchActivity() {
-
-        Intent intent = new Intent(this, LoginFragment.class);
-        startActivity(intent);
-    }
 
     // ArrayList<User> = myDB.displayAllUsers();
 

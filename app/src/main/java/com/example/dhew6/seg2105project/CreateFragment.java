@@ -102,24 +102,25 @@ public class CreateFragment extends Fragment {
                     Toast.makeText(getActivity(), "Passwords do not match", Toast.LENGTH_SHORT).show();
                     passwordEditText.setText("");
                     confirmEditText.setText("");
+                }else if(!myDB.validateNewUser(username, email)){
+                    Toast.makeText(getActivity(), "Username and/or email already exists.", Toast.LENGTH_SHORT).show();
+                    emailEditText.setText("");
+                    usernameEditText.setText("");
                 }
-                else {
-                    Intent sendMessage = new Intent(getActivity(), WelcomeScreen.class);
-                    sendMessage.putExtra("role", type);
-                    sendMessage.putExtra("loginUsernameEditText", fullname);
-                    getActivity().finish();
-                    startActivity(sendMessage);
-                }
+
                 //Validates username and email
                 if(myDB.validateNewUser(username,email)){
                     //If it is valid it creates a user of the specific type
-                    if(type == "Home Owner"){
+                    if(type.equals("Home Owner")){
                         myDB.createUser(fullname,password,email,User.HomeOwner);
                     }
-                    else if(type == "Service Provider"){
+                    else if(type.equals("Service Provider")){
                         myDB.createUser(fullname,password,email,User.ServiceProvider);
                     }
-                    // Switch to main intent
+                    Intent sendMessage = new Intent(getActivity(), WelcomeScreen.class);
+                    sendMessage.putExtra("loginUsernameEditText", fullname);
+                    getActivity().finish();
+                    startActivity(sendMessage);
                 }
             }
         });
