@@ -1,3 +1,11 @@
+/*
+    Mershab Arafat
+    SEG2105 Final Project
+    DatabaseHelper class
+    Class used to communicate between the database and the application.
+ */
+
+
 package com.example.dhew6.seg2105project;
 
 
@@ -7,16 +15,18 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
+    //Constants to store Database name, table name and names of columns.
     public static final String DATABASE_NAME = "User.db";
     public static final String TABLE_NAME = "USER_TABLE";
     public static final String COL_1 ="id";
-    public static final String COL_2 ="FName";
-    public static final String COL_3 ="LName";
-    public static final String COL_4 ="email";
-    public static final String COL_5 ="password";
-    public static final String COL_6 ="TypeOfUser";
+    public static final String COL_2 ="Name";
+    public static final String COL_3 ="email";
+    public static final String COL_4 ="password";
+    public static final String COL_5 ="typeOfUser";
 
 
     public DatabaseHelper(Context context) {
@@ -26,7 +36,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String query = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT,"+COL_2+" TEXT,"+COL_3+" TEXT,"+COL_4+" TEXT,"+COL_5+" TEXT,"+COL_6+" TEXT)";
+        String query = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT,"+COL_2+" TEXT,"+COL_3+" TEXT,"+COL_4+" TEXT,"+COL_5+" TEXT)";
         db.execSQL(query);
 
     }
@@ -37,6 +47,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    //Validates the existence of this user if they are trying to create a new user with certain credentials
     public boolean validateNewUser(String userName, String email)
     {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -50,19 +61,43 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         else return false;
     }
 
-    public boolean createUser(String firstName, String lastName, String password, String email, String userType){
+
+    //Creates a user in the database with the given credentials
+    public void createUser(String fullName, String password, String email, String userType){
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues content = new ContentValues();
 
-        content.put(COL_2, firstName);
-        content.put(COL_3, lastName);
-        content.put(COL_4, email);
-        content.put(COL_5, password);
-        content.put(COL_6,userType);
+        content.put(COL_2, fullName);
+        content.put(COL_3, email);
+        content.put(COL_4, password);
+        content.put(COL_5, userType);
 
-        return true;
+        db.insert(TABLE_NAME,null,content);
     }
+
+    //Outputs all the users in an arraylist
+    public ArrayList<User> displayAllUsers(){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor res = db.rawQuery("select * from " + TABLE_NAME, null);
+
+        ArrayList<User> userList = new ArrayList<User>();
+
+        while(res.moveToNext()){
+            if(res.getString(5) == User.HomeOwner){
+                HomeOwner temp = new HomeOwner(res.getString(1),res.getString(2),res.getString(3),res.getString(4));
+                userList.add(temp);
+            }
+            else if(res.getString(5) == User.ServiceProvider){
+                ServiceProvider temp = new ServiceProvider(res.getString(1),res.getString(2),res.getString(3),res.getString(4));
+                userList.add(temp);
+            }
+        }
+
+        return userList;
+    }
+
 
 
 }

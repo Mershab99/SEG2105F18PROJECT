@@ -103,18 +103,23 @@ public class CreateFragment extends Fragment {
                     passwordEditText.setText("");
                     confirmEditText.setText("");
                 }
-                else{
+                else {
                     Intent sendMessage = new Intent(getActivity(), WelcomeScreen.class);
                     sendMessage.putExtra("role", type);
                     sendMessage.putExtra("loginUsernameEditText", fullname);
                     getActivity().finish();
                     startActivity(sendMessage);
                 }
-                //FOR MERSHAB: CHECK IF USERNAME IS IN DB AND IF EMAIL IS IN DB.
+                //Validates username and email
                 if(myDB.validateNewUser(username,email)){
-                    //FOR KEITH: IF PASSES ALL CHECKS, SWITCH TO MAIN INTENT, WITH ALL STRINGS and CREATE THE RIGHT USER ACCORDING TO THE USERTYPE.
-
-                    //Mershab TO KEITH: Create the user type using the function myDB.createUser() and pass in the correct variables. Also use the final strings i put in the User class for USERTYPE
+                    //If it is valid it creates a user of the specific type
+                    if(type == "Home Owner"){
+                        myDB.createUser(fullname,password,email,User.HomeOwner);
+                    }
+                    else if(type == "Service Provider"){
+                        myDB.createUser(fullname,password,email,User.ServiceProvider);
+                    }
+                    // Switch to main intent
                 }
             }
         });
