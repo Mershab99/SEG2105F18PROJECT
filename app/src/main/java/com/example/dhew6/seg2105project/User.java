@@ -2,6 +2,11 @@ package com.example.dhew6.seg2105project;
 
 public class User {
 
+    public static final String HomeOwner = "HomeUser";
+    public static final String ServiceProvider = "SPUser";
+
+
+
     private String name; //name on birth certificate
     private String username; //name you give to login
     private String password; //password

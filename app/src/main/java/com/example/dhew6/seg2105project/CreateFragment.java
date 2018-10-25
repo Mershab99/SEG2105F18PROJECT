@@ -23,6 +23,8 @@ public class CreateFragment extends Fragment {
     Spinner userTypeSpinner;
     TextView loginTextView;
 
+    DatabaseHelper myDB;
+
     public CreateFragment() {
         // Required empty public constructor
     }
@@ -30,6 +32,9 @@ public class CreateFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        myDB = new DatabaseHelper(getContext());
+
         //retrieving view objects
         confirmEditText = getView().findViewById(R.id.confirmEditText);
         passwordEditText = getView().findViewById(R.id.createPasswordEditText);
@@ -106,7 +111,11 @@ public class CreateFragment extends Fragment {
                     startActivity(sendMessage);
                 }
                 //FOR MERSHAB: CHECK IF USERNAME IS IN DB AND IF EMAIL IS IN DB.
-                //FOR KEITH: IF PASSES ALL CHECKS, SWITCH TO MAIN INTENT, WITH ALL STRINGS and CREATE THE RIGHT USER ACCORDING TO THE USERTYPE.
+                if(myDB.validateNewUser(username,email)){
+                    //FOR KEITH: IF PASSES ALL CHECKS, SWITCH TO MAIN INTENT, WITH ALL STRINGS and CREATE THE RIGHT USER ACCORDING TO THE USERTYPE.
+
+                    //Mershab TO KEITH: Create the user type using the function myDB.createUser() and pass in the correct variables. Also use the final strings i put in the User class for USERTYPE
+                }
             }
         });
     }
