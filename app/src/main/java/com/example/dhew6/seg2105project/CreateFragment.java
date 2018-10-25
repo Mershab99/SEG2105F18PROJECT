@@ -71,6 +71,7 @@ public class CreateFragment extends Fragment {
      * KEITH: you must do the passing to welcome page. create a new user when you pass into the page in the oncreate.
      * MERSHAB: to check for validity for if email is already there and if the username is already there
      * NOTE: admin account should already be created, with username:admin, password admin.
+     * NOTE: in Canada you can have numbers in your name, so we do not need to check for numbers in name.
      */
     public void onCreateButtonClick(){
         createAccountButton.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +86,7 @@ public class CreateFragment extends Fragment {
                 String type = userTypeSpinner.getSelectedItem().toString();
 
                 //if the edittexts are empty
-                if(fullname.equals("") || email.equals("") || username.equals("") || password.equals("") || confirmPassword.equals("")){
+                if(fullname.equals("") || email.equals("") || username.equals("") || password.equals("") || confirmPassword.equals("")) {
                     Toast.makeText(getActivity(), "Fill in all required fields", Toast.LENGTH_SHORT).show();
                     //if it is not a valid email
                 }else if(!isValidEmail(email)){
@@ -99,7 +100,6 @@ public class CreateFragment extends Fragment {
                 }
                 else{
                     Intent sendMessage = new Intent(getActivity(), WelcomeScreen.class);
-                    Intent sendRole = new Intent(getActivity(), WelcomeScreen.class);
                     sendMessage.putExtra("role", type);
                     sendMessage.putExtra("loginUsernameEditText", fullname);
                     getActivity().finish();
