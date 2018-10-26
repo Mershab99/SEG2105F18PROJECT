@@ -19,6 +19,10 @@ public class User {
         this.email = email;
     }
 
+    public String getType(){
+        return "";
+    }
+
     public String getEmail() {
         return email;
     }

@@ -49,6 +49,8 @@ public class WelcomeScreen extends AppCompatActivity {
         String formattedType = "";
         Intent intent = getIntent();
         String username = intent.getStringExtra("loginUsernameEditText");
+        String role = intent.getStringExtra("role");
+
         boolean isAdmin = username.equals("admin");
         roleTextView = findViewById(R.id.roleTextView);
         usernameTextView = findViewById(R.id.usernameTextView);
@@ -56,16 +58,15 @@ public class WelcomeScreen extends AppCompatActivity {
         if(isAdmin){
             username = "Admin";
             formattedType = "Admin";
+            User admin = new Admin("admin", "admin", "admin", "admin");
         }else if(!isAdmin){
-
             User user = myDB.getUser(username);
-            String type = user.getClass().getName();
-            String[] stringArray = type.split("(?=\\p{Upper})");
-            formattedType = String.join(" ", stringArray);
+
         }
 
         usernameTextView.setText(username);
-        roleTextView.setText(formattedType);
+        roleTextView.setText(role);
+
     }
 
 

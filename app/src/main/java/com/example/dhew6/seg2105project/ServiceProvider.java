@@ -6,4 +6,8 @@ public class ServiceProvider extends User{
         super(name, username, password, email);
     }
 
+    @Override
+    public String getType() {
+        return "Service Provider";
+    }
 }

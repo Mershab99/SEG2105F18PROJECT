@@ -6,4 +6,8 @@ public class Admin extends User {
         super(name, username, password, email);
     }
 
+    @Override
+    public String getType() {
+        return "Admin";
+    }
 }

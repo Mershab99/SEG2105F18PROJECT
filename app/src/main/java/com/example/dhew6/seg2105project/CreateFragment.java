@@ -119,6 +119,7 @@ public class CreateFragment extends Fragment {
                     }
                     Intent sendMessage = new Intent(getActivity(), WelcomeScreen.class);
                     sendMessage.putExtra("loginUsernameEditText", fullname);
+                    sendMessage.putExtra("role", type);
                     getActivity().finish();
                     startActivity(sendMessage);
                 }
