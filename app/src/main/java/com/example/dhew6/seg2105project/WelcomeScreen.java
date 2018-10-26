@@ -7,7 +7,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +20,7 @@ public class WelcomeScreen extends AppCompatActivity {
     DatabaseHelper myDB;
     TextView roleTextView, usernameTextView;
     ArrayList<User> users;
+    ListView listview;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -57,10 +60,18 @@ public class WelcomeScreen extends AppCompatActivity {
 
         if(isAdmin){
             username = "Admin";
-            formattedType = "Admin";
+            role = "Admin";
             User admin = new Admin("admin", "admin", "admin", "admin");
+            listview = findViewById(R.id.listview);
+            ArrayList<String> usernames = new ArrayList<>();
+            for(int i = 0;i < users.size(); i++){
+                usernames.add(users.get(i).getUsername());
+            }
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,usernames);
+            listview.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
         }else if(!isAdmin){
-            User user = myDB.getUser(username);
+
 
         }
 
