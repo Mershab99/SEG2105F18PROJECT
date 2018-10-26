@@ -106,22 +106,22 @@ public class CreateFragment extends Fragment {
                     Toast.makeText(getActivity(), "Username and/or email already exists.", Toast.LENGTH_SHORT).show();
                     emailEditText.setText("");
                     usernameEditText.setText("");
-                }
-
-                //Validates username and email
-                if(myDB.validateNewUser(username,email)){
-                    //If it is valid it creates a user of the specific type
-                    if(type.equals("Home Owner")){
-                        myDB.createUser(fullname,username,password,email,User.HomeOwner);
+                }else{
+                    //Validates username and email
+                    if(myDB.validateNewUser(username,email)){
+                        //If it is valid it creates a user of the specific type4
+                        if(type.equals("Home Owner")){
+                            myDB.createUser(fullname,username,password,email,User.HomeOwner);
+                        }
+                        else if(type.equals("Service Provider")){
+                            myDB.createUser(fullname,username,password,email,User.ServiceProvider);
+                        }
+                        Intent sendMessage = new Intent(getActivity(), WelcomeScreen.class);
+                        sendMessage.putExtra("loginUsernameEditText", fullname);
+                        sendMessage.putExtra("role", type);
+                        getActivity().finish();
+                        startActivity(sendMessage);
                     }
-                    else if(type.equals("Service Provider")){
-                        myDB.createUser(fullname,username,password,email,User.ServiceProvider);
-                    }
-                    Intent sendMessage = new Intent(getActivity(), WelcomeScreen.class);
-                    sendMessage.putExtra("loginUsernameEditText", fullname);
-                    sendMessage.putExtra("role", type);
-                    getActivity().finish();
-                    startActivity(sendMessage);
                 }
             }
         });

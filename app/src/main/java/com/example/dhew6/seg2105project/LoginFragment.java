@@ -76,23 +76,22 @@ public class LoginFragment extends Fragment {
                     getActivity().finish();
                     startActivity(sendMessage);
                     return;
-                }
-                else {
+                } else {
                     boolean[] validUser = myDB.validateLogin(usernameText,passwordText);
                     if(validUser[0] == true){
                         if(validUser[1] == true){
-                            Toast.makeText(getActivity(),"Welcome", Toast.LENGTH_LONG);
+                            Toast.makeText(getActivity(),"Welcome", Toast.LENGTH_LONG).show();
                             Intent sendMessage = new Intent(getActivity(), WelcomeScreen.class);
                             sendMessage.putExtra("loginUsernameEditText", usernameText);
                             getActivity().finish();
                             startActivity(sendMessage);
                         }
                         else{
-                            Toast.makeText(getActivity(),"Incorrect Password", Toast.LENGTH_LONG);
+                            Toast.makeText(getActivity(),"Incorrect Password", Toast.LENGTH_LONG).show();
                         }
                     }
                     else if(validUser[0] == false){
-                        Toast.makeText(getActivity(),"User does not exist", Toast.LENGTH_LONG);
+                        Toast.makeText(getActivity(),"User does not exist", Toast.LENGTH_LONG).show();
                     }
                 }
 

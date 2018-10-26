@@ -71,8 +71,7 @@ public class WelcomeScreen extends AppCompatActivity {
             listview.setAdapter(adapter);
             adapter.notifyDataSetChanged();
         }else if(!isAdmin){
-
-
+            User user = myDB.getUser(username);
         }
 
         usernameTextView.setText(username);
