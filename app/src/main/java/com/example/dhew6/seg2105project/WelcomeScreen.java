@@ -9,11 +9,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class WelcomeScreen extends AppCompatActivity {
 
     DatabaseHelper myDB;
     TextView roleTextView, usernameTextView;
+    ArrayList<User> users;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -40,16 +44,29 @@ public class WelcomeScreen extends AppCompatActivity {
         setContentView(R.layout.welcome_screen);
 
         myDB = new DatabaseHelper(this);
+        users = myDB.displayAllUsers();
 
+        String formattedType = "";
         Intent intent = getIntent();
         String username = intent.getStringExtra("loginUsernameEditText");
-
+        boolean isAdmin = username.equals("admin");
         roleTextView = findViewById(R.id.roleTextView);
         usernameTextView = findViewById(R.id.usernameTextView);
+
+        if(isAdmin){
+            username = "Admin";
+            formattedType = "Admin";
+        }else if(!isAdmin){
+
+            User user = myDB.getUser(username);
+            String type = user.getClass().getName();
+            String[] stringArray = type.split("(?=\\p{Upper})");
+            formattedType = String.join(" ", stringArray);
+        }
+
         usernameTextView.setText(username);
+        roleTextView.setText(formattedType);
     }
 
-
-    // ArrayList<User> = myDB.displayAllUsers();
 
 }
