@@ -70,30 +70,34 @@ public class LoginFragment extends Fragment {
                 //if they are blank. create a toast (pop-up bottom of screen) to say it is blank.
                 if(usernameText.equals("") || passwordText.equals("")){
                     Toast.makeText(getActivity(), "Fill in all required fields", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                }else if(usernameText.equals("admin") && passwordText.equals("admin")){
                     Intent sendMessage = new Intent(getActivity(), WelcomeScreen.class);
                     sendMessage.putExtra("loginUsernameEditText", usernameText);
                     getActivity().finish();
                     startActivity(sendMessage);
+                    return;
+                }
+                else {
+                    boolean[] validUser = myDB.validateLogin(usernameText,passwordText);
+                    if(validUser[0] == true){
+                        if(validUser[1] == true){
+                            Toast.makeText(getActivity(),"Welcome", Toast.LENGTH_LONG);
+                            Intent sendMessage = new Intent(getActivity(), WelcomeScreen.class);
+                            sendMessage.putExtra("loginUsernameEditText", usernameText);
+                            getActivity().finish();
+                            startActivity(sendMessage);
+                        }
+                        else{
+                            Toast.makeText(getActivity(),"Incorrect Password", Toast.LENGTH_LONG);
+                        }
+                    }
+                    else if(validUser[0] == false){
+                        Toast.makeText(getActivity(),"User does not exist", Toast.LENGTH_LONG);
+                    }
                 }
 
 
                 //FOR MERSHAB: check if user is in database, if not display the toast.
-                boolean[] validUser = myDB.validateLogin(usernameText,passwordText);
-                if(validUser[0] == true){
-                    if(validUser[1] == true){
-                        Toast.makeText(getActivity(),"Welcome", Toast.LENGTH_LONG);
-                        //GO TO WELCOME PAGE
-                    }
-                    else{
-                        Toast.makeText(getActivity(),"Incorrect Password", Toast.LENGTH_LONG);
-                    }
-                }
-                else if(validUser[0] == false){
-                    Toast.makeText(getActivity(),"User does not exist", Toast.LENGTH_LONG);
-                }
-                //FOR KEITH: if it passes all checks go to the welcome page, with the user info from the firebase
 
             }
         });
