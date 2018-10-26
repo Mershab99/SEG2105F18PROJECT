@@ -118,7 +118,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public User getUser(String userName){
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor res = db.rawQuery("select * from " + TABLE_NAME+ "WHERE " +COL_3+"="+userName, null);
+        Cursor res = db.rawQuery("select * from " + TABLE_NAME+ " WHERE " +COL_3+" = "+"'"+userName+"'", null);
 
         if(res.getString(5) == User.HomeOwner){
             return new HomeOwner(res.getString(1),res.getString(2),res.getString(3),res.getString(4));
