@@ -95,18 +95,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //Outputs all the users in an ArrayList
     public ArrayList<User> displayAllUsers(){
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor res = db.rawQuery("select * from " + TABLE_NAME, null);
 
         ArrayList<User> userList = new ArrayList<User>();
         res.moveToFirst();
         while(res.moveToNext()){
-            if(res.getString(5) == User.HomeOwner){
+            if(res.getString(5).equals(User.HomeOwner)){
                 HomeOwner temp = new HomeOwner(res.getString(1),res.getString(2),res.getString(3),res.getString(4));
                 userList.add(temp);
             }
-            else if(res.getString(5) == User.ServiceProvider){
+            else if(res.getString(5).equals(User.ServiceProvider)){
                 ServiceProvider temp = new ServiceProvider(res.getString(1),res.getString(2),res.getString(3),res.getString(4));
                 userList.add(temp);
             }
