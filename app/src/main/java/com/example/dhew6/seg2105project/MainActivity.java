@@ -13,11 +13,14 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    DatabaseHelper myDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        myDB = new DatabaseHelper(this);
+
         setContentView(R.layout.activity_main);
 
         //replace the blank fragment with the login fragment

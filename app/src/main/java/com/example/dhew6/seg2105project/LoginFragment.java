@@ -78,8 +78,6 @@ public class LoginFragment extends Fragment {
                     startActivity(sendMessage);
                 }
 
-
-                //FOR MERSHAB: check if user is in database, if not display the toast.
                 boolean[] validUser = myDB.validateLogin(usernameText,passwordText);
                 if(validUser[0] == true){
                     if(validUser[1] == true){
