@@ -23,7 +23,7 @@ public class LoginFragment extends Fragment {
 
     DatabaseHelper myDB;
 
-    public final static String EXTRA_MESSAGE="com.example.myHelloAndroid.MESSAGE";
+    public final static String EXTRA_MESSAGE = "com.example.myHelloAndroid.MESSAGE";
 
     public LoginFragment() {
         // Required empty public constructor
@@ -59,7 +59,7 @@ public class LoginFragment extends Fragment {
      * Mershab: retrieve all user data using the username as a key including what type of user.
      * Mershab: check if the user is in the database, and check if the user has the same password as in the database.
      */
-    public void onLoginButtonPress(){
+    public void onLoginButtonPress() {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,36 +68,31 @@ public class LoginFragment extends Fragment {
                 //string stored in the password edit text
                 String passwordText = passwordEditText.getText().toString();
                 //if they are blank. create a toast (pop-up bottom of screen) to say it is blank.
-                if(usernameText.equals("") || passwordText.equals("")){
+                if (usernameText.equals("") || passwordText.equals("")) {
                     Toast.makeText(getActivity(), "Fill in all required fields", Toast.LENGTH_SHORT).show();
-                }else if(usernameText.equals("admin") && passwordText.equals("admin")){
+                } else if (usernameText.equals("admin") && passwordText.equals("admin")) {
                     Intent sendMessage = new Intent(getActivity(), WelcomeScreen.class);
                     sendMessage.putExtra("loginUsernameEditText", usernameText);
                     getActivity().finish();
                     startActivity(sendMessage);
                     return;
                 } else {
-                    boolean[] validUser = myDB.validateLogin(usernameText,passwordText);
-                    if(validUser[0] == true){
-                        if(validUser[1] == true){
-                            Toast.makeText(getActivity(),"Welcome", Toast.LENGTH_LONG).show();
-                            Intent sendMessage = new Intent(getActivity(), WelcomeScreen.class);
-                            sendMessage.putExtra("loginUsernameEditText", usernameText);
-                            getActivity().finish();
-                            startActivity(sendMessage);
-                        }
-                        else{
-                            Toast.makeText(getActivity(),"Incorrect Password", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                    else if(validUser[0] == false){
-                        Toast.makeText(getActivity(),"User does not exist", Toast.LENGTH_LONG).show();
+                    int validUser = myDB.validateLogin(usernameText, passwordText);
+                    if (validUser == 1) {
+                        Toast.makeText(getActivity(), "Welcome", Toast.LENGTH_LONG).show();
+                        Intent sendMessage = new Intent(getActivity(), WelcomeScreen.class);
+                        sendMessage.putExtra("loginUsernameEditText", usernameText);
+                        getActivity().finish();
+                        startActivity(sendMessage);
+                    } else if (validUser == -1) {
+                        usernameEditText.setText("");
+                        passwordEditText.setText("");
+                        Toast.makeText(getActivity(), "User does not exist", Toast.LENGTH_LONG).show();
+                    } else if (validUser == 0) {
+                        passwordEditText.setText("");
+                        Toast.makeText(getActivity(), "Incorrect Password", Toast.LENGTH_LONG).show();
                     }
                 }
-
-
-                //FOR MERSHAB: check if user is in database, if not display the toast.
-
             }
         });
     }
@@ -105,7 +100,7 @@ public class LoginFragment extends Fragment {
     /**
      * Switches to the create new account fragment
      */
-    public void onCreateNowPress(){
+    public void onCreateNowPress() {
         createNowTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,9 +113,6 @@ public class LoginFragment extends Fragment {
         });
 
     }
-
-
-
 
 
 }

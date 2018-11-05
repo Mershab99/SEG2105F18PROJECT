@@ -117,8 +117,7 @@ public class CreateFragment extends Fragment {
                             myDB.createUser(fullname,username,password,email,User.ServiceProvider);
                         }
                         Intent sendMessage = new Intent(getActivity(), WelcomeScreen.class);
-                        sendMessage.putExtra("loginUsernameEditText", fullname);
-                        sendMessage.putExtra("role", type);
+                        sendMessage.putExtra("loginUsernameEditText", username);
                         getActivity().finish();
                         startActivity(sendMessage);
                     }

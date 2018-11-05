@@ -15,6 +15,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -29,7 +30,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_4 ="Password";
     public static final String COL_5 ="email";
     public static final String COL_6 ="typeOfUser";
-
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -61,20 +61,44 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         else return false;
     }
 
-    public boolean[] validateLogin(String userName, String password){
+    /**
+     * validates your login
+     * @param userName
+     * @param passWord
+     * @return -1 if the user doesn't exist, 0 if the passwords don't match and 1 if they successfully log in.
+     */
+    public int validateLogin(String userName, String passWord){
 
         SQLiteDatabase db = this.getReadableDatabase();
-        boolean[] userValid = new boolean[2];
 
-        Cursor resUserName = db.rawQuery("select " + COL_3+ " from " + TABLE_NAME + " WHERE " +COL_3+ " = " +"'"+userName+"'",null);
-        Cursor resPassword = db.rawQuery("select " + COL_4+ " from " + TABLE_NAME + " WHERE " +COL_4+ " = " +"'"+password+"'",null);
+        String[] arr = new String[]{COL_3, COL_4};
+        String selection = COL_3 + " = ?";
+        String[] selectionArgs = { userName };
 
-        if(resUserName.getCount() == 0)
-            userValid[0] = true;
-        if(resPassword.getCount() == 0)
-            userValid[1] = true;
+        Cursor cursor = db.query(TABLE_NAME, arr, selection, selectionArgs, null, null, null, null);
+        String cursorPass, cursorUsername;
+        cursorPass = cursorUsername = "";
 
-        return userValid;
+
+        while(cursor.moveToNext()){
+            cursorUsername = cursor.getString(cursor.getColumnIndex(COL_3));
+            cursorPass = cursor.getString(cursor.getColumnIndex(COL_4));
+        }
+        cursor.close();
+
+        //empty therefore username doesn't exist
+        if(cursorPass.equals("") || cursorUsername.equals("")){
+            return -1;
+        }
+
+        //doesn't equal password
+        if(!cursorPass.equals(passWord)){
+            return 0;
+        }
+
+        //good login.
+        return 1;
+
     }
 
     //Creates a user in the database with the given credentials
@@ -115,21 +139,37 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return userList;
     }
 
+    /**
+     * retrieve user and create the correct type of user
+     * @param userName username of the user you want to access
+     * @return user of correct type
+     */
     public User getUser(String userName){
+
         SQLiteDatabase db = this.getReadableDatabase();
+        String[] allColumns = new String[]{COL_1,COL_2, COL_3, COL_4, COL_5, COL_6};
+        String selection = COL_3 + " = ?";
+        String[] selectionArgs = { userName };
 
-        Cursor res = db.rawQuery("select * from " + TABLE_NAME+ " WHERE " +COL_3+" = "+"'"+userName+"'", null);
+        Cursor cursor = db.query(TABLE_NAME, allColumns, selection, selectionArgs, null, null, null, null);
+        String name, resUsername, password, email, userType;
+        name = resUsername = password = email = userType = "";
 
-        res.moveToFirst();
-        if(res.getString(5) == User.HomeOwner){
-            return new HomeOwner(res.getString(1),res.getString(2),res.getString(3),res.getString(4));
+        while(cursor.moveToNext()){
+            name = cursor.getString(cursor.getColumnIndex(COL_2));
+            resUsername = cursor.getString(cursor.getColumnIndex(COL_3));
+            password = cursor.getString(cursor.getColumnIndex(COL_4));
+            email = cursor.getString(cursor.getColumnIndex(COL_5));
+            userType = cursor.getString(cursor.getColumnIndex(COL_6));
         }
-        else if(res.getString(5) == User.ServiceProvider){
-            return new ServiceProvider(res.getString(1),res.getString(2),res.getString(3),res.getString(4));
+        cursor.close();
+
+        if(userType.equals(User.HomeOwner)){
+            return new HomeOwner(name, resUsername, password, email);
+        }else if(userType.equals(User.ServiceProvider)){
+            return new ServiceProvider(name, resUsername, password, email);
         }
-
-        return new User(null,null,null,null);
-
+        return null;
     }
 
 
