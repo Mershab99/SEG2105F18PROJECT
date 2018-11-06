@@ -17,6 +17,8 @@ import java.util.ArrayList;
 
 public class WelcomeScreen extends AppCompatActivity {
 
+    //init commit of branch
+
     DatabaseHelper myDB;
     TextView roleTextView, usernameTextView;
     ArrayList<User> users;
