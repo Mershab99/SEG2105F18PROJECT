@@ -1,11 +1,15 @@
 package com.example.dhew6.seg2105project;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 public class AdminActivity extends AppCompatActivity {
 
@@ -22,6 +26,26 @@ public class AdminActivity extends AppCompatActivity {
         viewPager.setAdapter(adapterViewPager);
         viewPager.setCurrentItem(1);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = new MenuInflater(getApplicationContext());
+        inflater.inflate(R.menu.settings_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.logOutItem:
+                //if you select the log out option in the menu then you should go back to log in screen
+                Intent intent = new Intent(this, MainActivity.class);
+                finish();
+                startActivity(intent);
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public class MyPagerAdapter extends FragmentPagerAdapter{

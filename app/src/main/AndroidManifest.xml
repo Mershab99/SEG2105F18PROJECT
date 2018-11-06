@@ -17,7 +17,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".WelcomeScreen" />
-        <activity android:name=".AdminActivity"></activity>
+        <activity
+            android:name=".AdminActivity"
+            android:windowSoftInputMode="stateHidden"></activity>
     </application>
 
 </manifest>
