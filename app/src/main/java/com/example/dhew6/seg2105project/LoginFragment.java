@@ -71,10 +71,9 @@ public class LoginFragment extends Fragment {
                 if (usernameText.equals("") || passwordText.equals("")) {
                     Toast.makeText(getActivity(), "Fill in all required fields", Toast.LENGTH_SHORT).show();
                 } else if (usernameText.equals("admin") && passwordText.equals("admin")) {
-                    Intent sendMessage = new Intent(getActivity(), WelcomeScreen.class);
-                    sendMessage.putExtra("loginUsernameEditText", usernameText);
+                    Intent intent = new Intent(getActivity(), AdminActivity.class);
                     getActivity().finish();
-                    startActivity(sendMessage);
+                    startActivity(intent);
                     return;
                 } else {
                     int validUser = myDB.validateLogin(usernameText, passwordText);
