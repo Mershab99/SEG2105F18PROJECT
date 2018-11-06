@@ -19,11 +19,10 @@ public class WelcomeScreen extends AppCompatActivity {
 
     DatabaseHelper myDB;
     TextView roleTextView, usernameTextView;
-    ArrayList<User> users;
-    ListView listview;
 
     /**
      * inflates the menu for a log out option
+     *
      * @param menu
      * @return
      */
@@ -52,41 +51,23 @@ public class WelcomeScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_screen);
 
-        //database
-        myDB = new DatabaseHelper(this);
-        users = myDB.displayAllUsers();
-
         Intent intent = getIntent();
         String username = intent.getStringExtra("loginUsernameEditText");
         String role = "";
-
-        boolean isAdmin = username.equals("admin");
+        String name = "";
         roleTextView = findViewById(R.id.roleTextView);
         usernameTextView = findViewById(R.id.usernameTextView);
 
         //if the user is admin then display all users in a listview
-        if (isAdmin) {
-            username = "Admin";
-            role = "Admin";
-            User admin = new Admin("admin", "admin", "admin", "admin");
-            listview = findViewById(R.id.listview);
-            ArrayList<String> usernames = new ArrayList<>();
-            for (int i = 0; i < users.size(); i++) {
-                usernames.add(users.get(i).getUsername());
-            }
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, usernames);
-            listview.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
-        } else if (!isAdmin) {
-            //if they aren't an admin then get the user then display the type.
-            User user = myDB.getUser(username);
-            if (user != null) {
-                username = user.getName();
-                role = user.getType();
-            }
+
+        //if they aren't an admin then get the user then display the type.
+        User user = myDB.getUser(username);
+        if (user != null) {
+            name = user.getName();
+            role = user.getType();
         }
 
-        usernameTextView.setText(username);
+        usernameTextView.setText(name);
         roleTextView.setText(role);
 
     }
