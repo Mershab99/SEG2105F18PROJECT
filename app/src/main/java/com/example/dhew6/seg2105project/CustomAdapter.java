@@ -13,17 +13,21 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class CustomAdapter extends ArrayAdapter<Service> {
 
     private ArrayList<Service> serviceArrayList;
+    private ArrayList<Service> searchList;
     Context context;
 
     public CustomAdapter(Context context, ArrayList<Service> item_list) {
         super(context, R.layout.list_row_item, item_list);
         this.context = context;
         this.serviceArrayList = item_list;
+        this.searchList = new ArrayList<>();
+        this.searchList.addAll(item_list);
     }
 
     static class ViewHolder {
@@ -74,10 +78,28 @@ public class CustomAdapter extends ArrayAdapter<Service> {
             result = convertView;
         }
 
+        String format2 = new DecimalFormat("#,###.00").format(service.getRate());
         viewHolder.serviceRowTextView.setText("Service Name: " + service.getName());
-        viewHolder.rateRowTextView.setText("Hourly Rate: $" + Double.toString(service.getRate()));
+        viewHolder.rateRowTextView.setText("Hourly Rate: $" + format2);
 
         return convertView;
     }
+
+    public void filter(String s){
+
+        String next = s.toLowerCase();
+        serviceArrayList.clear();
+        if(next.length() == 0){
+            serviceArrayList.addAll(searchList);
+        } else {
+            for(Service service : searchList){
+                if(service.getName().toLowerCase().contains(next)){
+                    serviceArrayList.add(service);
+                }
+            }
+        }
+        notifyDataSetChanged();
+    }
+
 }
 
