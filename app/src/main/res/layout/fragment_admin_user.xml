@@ -12,24 +12,12 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="90dp"
-            android:layout_marginTop="8dp"
-            android:text="Your Role:"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/usernameTextView" />
-
-        <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:text="Welcome!"
             android:textSize="40sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -52,21 +40,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-        <TextView
-            android:id="@+id/roleTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="8dp"
-            android:text="Admin"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/textView2"
-            app:layout_constraintTop_toBottomOf="@+id/usernameTextView" />
-
         <ListView
             android:id="@+id/listview"
             android:layout_width="0dp"
@@ -74,51 +47,53 @@
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/listview_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchEditText" />
+            app:layout_constraintTop_toBottomOf="@+id/listviewTitle" />
 
         <View
             android:id="@+id/divider1"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginEnd="12dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="20dp"
             android:background="@color/colorMainBlue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            app:layout_constraintTop_toBottomOf="@+id/usernameTextView" />
 
         <TextView
             android:id="@+id/listviewTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="48dp"
             android:text="Users in the Database"
             android:textColor="#000000"
-            android:textSize="15dp"
+            android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            app:layout_constraintTop_toBottomOf="@+id/usernameTextView" />
 
         <EditText
             android:id="@+id/searchEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
             android:hint="Find a Username..."
+            android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/listviewTitle" />
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/listviewTitle"
+            app:layout_constraintTop_toBottomOf="@+id/divider1" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>
