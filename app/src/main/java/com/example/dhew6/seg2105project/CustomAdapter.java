@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -30,6 +29,27 @@ public class CustomAdapter extends ArrayAdapter<Service> {
     static class ViewHolder {
         public TextView rateRowTextView;
         public TextView serviceRowTextView;
+    }
+
+    @Override
+    public int getCount() {
+        return serviceArrayList.size();
+    }
+
+    @Nullable
+    @Override
+    public Service getItem(int position) {
+        return serviceArrayList.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    public void remove(int position) {
+        serviceArrayList.remove(position);
+        notifyDataSetChanged();
     }
 
     @NonNull

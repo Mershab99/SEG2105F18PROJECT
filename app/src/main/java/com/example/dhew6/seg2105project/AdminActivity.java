@@ -31,7 +31,7 @@ public class AdminActivity extends AppCompatActivity {
         viewPager.setAdapter(adapterViewPager);
         viewPager.setCurrentItem(1);
 
-        Snackbar snackbar = Snackbar.make(findViewById(R.id.myCoordinatorLayout), "Swipe left and right for other screens!", 10000);
+        Snackbar snackbar = Snackbar.make(findViewById(R.id.myCoordinatorLayout), "Swipe left and right for other screens!", 5000);
         snackbar.show();
 
     }
