@@ -23,8 +23,6 @@ public class LoginFragment extends Fragment {
 
     DatabaseHelper myDB;
 
-    public final static String EXTRA_MESSAGE = "com.example.myHelloAndroid.MESSAGE";
-
     public LoginFragment() {
         // Required empty public constructor
     }

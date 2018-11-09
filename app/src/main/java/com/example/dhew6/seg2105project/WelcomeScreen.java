@@ -51,6 +51,8 @@ public class WelcomeScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_screen);
 
+        myDB = new DatabaseHelper(getApplicationContext());
+
         Intent intent = getIntent();
         String username = intent.getStringExtra("loginUsernameEditText");
         String role = "";
@@ -58,9 +60,6 @@ public class WelcomeScreen extends AppCompatActivity {
         roleTextView = findViewById(R.id.roleTextView);
         usernameTextView = findViewById(R.id.usernameTextView);
 
-        //if the user is admin then display all users in a listview
-
-        //if they aren't an admin then get the user then display the type.
         User user = myDB.getUser(username);
         if (user != null) {
             name = user.getName();

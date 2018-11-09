@@ -34,6 +34,7 @@ public class AdminUserFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        //gets the views
         listview = getView().findViewById(R.id.listview);
         searchEditText = getView().findViewById(R.id.searchEditText);
 
