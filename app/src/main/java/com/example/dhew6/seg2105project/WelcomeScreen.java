@@ -33,6 +33,12 @@ public class WelcomeScreen extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    /**
+     * run upon the selection of an options menu
+     * has a MenuItem as a parameter that is what item was selected
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -42,10 +48,20 @@ public class WelcomeScreen extends AppCompatActivity {
                 finish();
                 startActivity(intent);
             default:
+                //if it is not a logOutItem
                 return super.onOptionsItemSelected(item);
         }
     }
 
+    /**
+     * called on creation of the welcomescreen
+     *
+     * this inits the db helper,
+     * gets the user,
+     * gets the user values and displays them within the view
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

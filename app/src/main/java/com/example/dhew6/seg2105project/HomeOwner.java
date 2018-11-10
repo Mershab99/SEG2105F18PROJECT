@@ -6,6 +6,9 @@ public class HomeOwner extends User {
         super(name, username, password, email);
     }
 
+    /**
+     * @return String representation of userType
+     */
     @Override
     public String getType() {
         return "Home Owner";

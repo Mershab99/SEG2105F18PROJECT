@@ -15,10 +15,16 @@ public class MainActivity extends AppCompatActivity {
 
     DatabaseHelper myDB;
 
+    /**
+     * run on start of the app
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //inits db helper class
         myDB = new DatabaseHelper(this);
 
         setContentView(R.layout.activity_main);

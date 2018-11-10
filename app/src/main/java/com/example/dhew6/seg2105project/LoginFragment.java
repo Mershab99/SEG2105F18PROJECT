@@ -27,6 +27,12 @@ public class LoginFragment extends Fragment {
         // Required empty public constructor
     }
 
+    /**
+     * run on creation of the view. this inits all the values
+     *
+     * @param view
+     * @param savedInstanceState
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -45,6 +51,14 @@ public class LoginFragment extends Fragment {
 
     }
 
+    /**
+     * run on creation of the view. this creates the inflater with the login fragment layout
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -95,7 +109,7 @@ public class LoginFragment extends Fragment {
     }
 
     /**
-     * Switches to the create new account fragment
+     * when the ceateNow is pressed it switches the layout of the fragment
      */
     public void onCreateNowPress() {
         createNowTextView.setOnClickListener(new View.OnClickListener() {

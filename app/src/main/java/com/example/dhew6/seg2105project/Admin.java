@@ -6,6 +6,12 @@ public class Admin extends User {
         super(name, username, password, email);
     }
 
+    /**
+     * overrides the User java
+     * returns a string representation of the type of this class
+     *
+     * @return {String}
+     */
     @Override
     public String getType() {
         return "Admin";

@@ -12,6 +12,15 @@ public class User {
     private String password; //password
     private String email; //email
 
+
+    /**
+     * initializes a user object
+     *
+     * @param name
+     * @param username
+     * @param password
+     * @param email
+     */
     public User(String name, String username, String password, String email) {
         this.name = name;
         this.username = username;

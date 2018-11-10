@@ -20,6 +20,12 @@ public class AdminActivity extends AppCompatActivity {
     ViewPager viewPager;
     ConstraintLayout layout;
 
+    /**
+     *
+     *
+     *
+     * @param {Bundle} savedInstanceState -
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +42,11 @@ public class AdminActivity extends AppCompatActivity {
 
     }
 
+    /**
+     *
+     * @param menu
+     * @return boolean
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = new MenuInflater(getApplicationContext());
@@ -43,25 +54,51 @@ public class AdminActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    /**
+     *
+     * called when and item from OptionsItem is selected; a param MenuItem item is provided to define the
+     *
+     * @param item
+     * @return boolean
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            //switch checks to see if it is
             case R.id.logOutItem:
                 //if you select the log out option in the menu then you should go back to log in screen
                 Intent intent = new Intent(this, MainActivity.class);
                 finish();
+                //finishes the adminActivity then starts the MainActivity
                 startActivity(intent);
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
+    /**
+     *
+     */
     public class MyPagerAdapter extends FragmentPagerAdapter{
-
+        /**
+         * calls the parent class FragmentPagerAdapter
+         *
+         * @param fm
+         */
         public MyPagerAdapter(FragmentManager fm){
             super(fm);
         }
 
+        /**
+         *  returns the fragment associated to one of two positions
+         *  1 - AdminsServiceFragment
+         *  2 - AdminUserFragment
+         *
+         *  this method is easily scalable for more fragments
+         *
+         * @param position - integer position
+         * @return
+         */
         @Override
         public Fragment getItem(int position) {
             switch (position) {
@@ -73,6 +110,13 @@ public class AdminActivity extends AppCompatActivity {
             return null;
         }
 
+        /**
+         * returns the count of Fragments
+         *
+         * this method is easily scalable for more fragments
+         *
+         * @return {int}
+         */
         @Override
         public int getCount() {
             return 2;

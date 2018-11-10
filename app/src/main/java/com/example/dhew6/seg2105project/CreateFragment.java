@@ -29,6 +29,13 @@ public class CreateFragment extends Fragment {
         // Required empty public constructor
     }
 
+    /**
+     * run on creation of CreateFragment view
+     * inits all elements
+     *
+     * @param view
+     * @param savedInstanceState
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -51,6 +58,15 @@ public class CreateFragment extends Fragment {
 
     }
 
+    /**
+     * run on the creation of CreateFragment
+     * returns view with fragment_create layout
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

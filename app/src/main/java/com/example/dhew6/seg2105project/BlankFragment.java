@@ -9,11 +9,21 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class BlankFragment extends Fragment {
-
+    /**
+     * empty constructor
+     */
     public BlankFragment() {
         // Required empty public constructor
     }
 
+    /**
+     * creates view using the fragment_blank layout
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

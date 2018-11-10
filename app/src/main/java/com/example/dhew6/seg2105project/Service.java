@@ -5,6 +5,12 @@ public class Service {
     private String name;
     private double rate;
 
+    /**
+     * inits the Service object and sets values
+     *
+     * @param name
+     * @param rate
+     */
     public Service(String name, double rate) {
         this.name = name;
         this.rate = rate;

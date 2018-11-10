@@ -42,6 +42,12 @@ public class AdminServiceFragment extends Fragment {
 
     HashMap<String, Service> serviceMap;
 
+    /**
+     * run when AdminServiceFragment starts
+     *
+     * @param view
+     * @param savedInstanceState
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -68,6 +74,12 @@ public class AdminServiceFragment extends Fragment {
 
     }
 
+    /**
+     * checks if rate is valid
+     *
+     * @param rate
+     * @return
+     */
     public boolean validRate(String rate) {
 
         if (!isNumeric(rate)) {
@@ -82,6 +94,12 @@ public class AdminServiceFragment extends Fragment {
         return true;
     }
 
+    /**
+     * checks if string is numeric by duck typing it
+     *
+     * @param str
+     * @return
+     */
     public static boolean isNumeric(String str) {
         try {
             double d = Double.parseDouble(str);
@@ -93,7 +111,10 @@ public class AdminServiceFragment extends Fragment {
 
     /**
      *
-     * @param editMode true = edit mode. false = add.
+     *
+     *
+     * @param editMode {boolean} true = edit mode. false = add.
+     * @param pos {int}
      */
     public void inflateDialog(final boolean editMode, final int pos) {
 
@@ -154,11 +175,17 @@ public class AdminServiceFragment extends Fragment {
 
     }
 
+    /**
+     * closes keyboard
+     */
     private void closeKeyboard() {
         InputMethodManager inputManager = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
+    /**
+     * adds onclick listener for addServiceButton
+     */
     public void addServiceButtonClicked() {
         addServiceButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,6 +195,19 @@ public class AdminServiceFragment extends Fragment {
         });
     }
 
+    /**
+     *
+     * validates a string to insure that string service and String rate are valid entries
+     *
+     * if it doesn't validate it creates a toast with an alert about why it didn't validate
+     *
+     * @param service
+     * @param rate
+     * @param serviceET
+     * @param rateET
+     * @param editMode
+     * @return
+     */
     public boolean validateAdding(String service, String rate, EditText serviceET, EditText rateET, boolean editMode) {
 
         if (rate.trim().equals("") || service.trim().equals("")) {
@@ -192,6 +232,14 @@ public class AdminServiceFragment extends Fragment {
         // Required empty public constructor
     }
 
+    /**
+     * called upon creation of AdminServiceFragment
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -199,11 +247,19 @@ public class AdminServiceFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_admin_service, container, false);
     }
 
+    /**
+     * creates new AdminServiceFragment instance
+     * @return {AdminServiceFragment}
+     */
     public static AdminServiceFragment newInstance() {
         AdminServiceFragment frag = new AdminServiceFragment();
         return frag;
     }
 
+    /**
+     * adds functionality to the searchServicesET text input
+     * adds a TextChangeListener that filters the values shown within the customAdapter
+     */
     public void search(){
         searchServicesET.addTextChangedListener(new TextWatcher() {
             @Override
@@ -223,6 +279,9 @@ public class AdminServiceFragment extends Fragment {
         });
     }
 
+    /**
+     * listens for a long click on servicesListView and creates an inflateDialog
+     */
     public void editListView(){
 
         servicesListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -234,6 +293,11 @@ public class AdminServiceFragment extends Fragment {
         });
     }
 
+    /**
+     * transforms a HashMap into a json serializable object and adds that
+     *
+     * @param map
+     */
     public void updateSharedPrefs(HashMap<String, Service> map){
 
         Gson gson = new Gson();
@@ -244,6 +308,12 @@ public class AdminServiceFragment extends Fragment {
 
     }
 
+    /**
+     * reads a string representation of a hashmap object into a hashmap and returns it
+     * gets the hashmap object from SharedPreferences
+     *
+     * @return {HashMap<String, Service>}
+     */
     public HashMap<String, Service> getFromShreadPrefs(){
 
         Gson gson = new Gson();
@@ -258,6 +328,9 @@ public class AdminServiceFragment extends Fragment {
 
     }
 
+    /**
+     *
+     */
     public void assignListviewListener() {
 
         final SwipeToDismissTouchListener<ListViewAdapter> touchListener =

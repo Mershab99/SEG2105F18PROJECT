@@ -35,6 +35,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, 1);
     }
 
+    /**
+     * runs an SQL command to create a table with the default name and default columns
+     *
+     * @param db
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
 
@@ -42,13 +47,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.d("db", "CREATE USER TABLE");
     }
 
+    /**
+     * onUpgrade drops the table if it exists then creates the database
+     *
+     * @param db
+     * @param oldVersion
+     * @param newVersion
+     */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }
 
-    //Validates the existence of this user if they are trying to create a new user with certain credentials
+    /**
+     * Validates the existence of this user if they are trying to create a new user with certain credentials
+     *
+     * @param userName
+     * @param email
+     * @return false if the new user is valid returns true if the new user is not valid
+     */
     public boolean validateNewUser(String userName, String email)
     {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -101,6 +119,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    /**
+     * creates new user given values for fullName, userName, password, email, and userType
+     * then attempts to insert it into the database
+     *
+     * @param fullName
+     * @param userName
+     * @param password
+     * @param email
+     * @param userType
+     */
     //Creates a user in the database with the given credentials
     public void createUser(String fullName, String userName, String password, String email, String userType){
 
@@ -117,7 +145,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.insert(TABLE_NAME,null,content);
     }
 
-    //Outputs all the users in an ArrayList
+    /**
+     * Outputs all the users in an ArrayList
+     *
+     * @return ArrayList<User> of all the users
+     */
+    //
     public ArrayList<User> displayAllUsers(){
         SQLiteDatabase db = this.getReadableDatabase();
 

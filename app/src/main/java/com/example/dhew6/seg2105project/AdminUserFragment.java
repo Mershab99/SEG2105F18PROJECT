@@ -30,6 +30,12 @@ public class AdminUserFragment extends Fragment {
         // Required empty public constructor
     }
 
+    /**
+     * called on creation of the AdminUserFragment view
+     *
+     * @param view
+     * @param savedInstanceState
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -63,6 +69,10 @@ public class AdminUserFragment extends Fragment {
 
     }
 
+    /**
+     * adds functionality to the searchServicesET text input
+     * adds a TextChangeListener that filters the values shown within the customAdapter
+     */
     public void search(){
         searchEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -82,6 +92,14 @@ public class AdminUserFragment extends Fragment {
         });
     }
 
+    /**
+     * run on creation of AdminUserFragment view
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
