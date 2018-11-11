@@ -35,6 +35,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, 1);
     }
 
+
     /**
      * runs an SQL command to create a table with the default name and default columns
      *
