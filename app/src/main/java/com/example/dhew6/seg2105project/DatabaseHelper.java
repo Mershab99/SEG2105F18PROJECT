@@ -158,7 +158,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor res = db.rawQuery("select * from " + TABLE_NAME, null);
 
         ArrayList<User> userList = new ArrayList<User>();
-        res.moveToFirst();
+        //res.moveToFirst(); this causes unintended behaviour, makes first user in list not be included
         while(res.moveToNext()){
             if(res.getString(5).equals(User.HomeOwner)){
                 HomeOwner temp = new HomeOwner(res.getString(1),res.getString(2),res.getString(3),res.getString(4));

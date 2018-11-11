@@ -50,7 +50,7 @@
             android:clickable="false"
             android:gravity="center_vertical"
             android:hapticFeedbackEnabled="true"
-            android:text="Delete"
+            android:text="Swipe to Delete"
             android:textColor="@color/red" />
 
         <TextView
