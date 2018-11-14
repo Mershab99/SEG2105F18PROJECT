@@ -1,11 +1,14 @@
 package com.example.dhew6.seg2105project;
 
+import java.util.ArrayList;
+
 public class ServiceProvider extends User{
 
-    private String[] time; //available time slots
+    private ArrayList<String> time; //available time slots
     private String address;
     private String phone;
     private String desc;
+    private String company;
     private boolean licensed;
 
     public ServiceProvider(String name, String username, String password, String email) {
@@ -44,6 +47,14 @@ public class ServiceProvider extends User{
         this.licensed = licensed;
     }
 
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
     /**
      * @return String representation of userType
      */
@@ -52,11 +63,11 @@ public class ServiceProvider extends User{
         return "Service Provider";
     }
 
-    public String[] getTime() {
+    public ArrayList<String> getTime() {
         return time;
     }
 
-    public void setTime(String[] time) {
+    public void setTime(ArrayList<String> time) {
         this.time = time;
     }
 }

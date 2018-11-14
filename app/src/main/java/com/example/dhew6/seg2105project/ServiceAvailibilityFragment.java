@@ -21,9 +21,10 @@ public class ServiceAvailibilityFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_service_availibility, container, false);
     }
 
-    public static ServiceMainFragment newInstance(){
-        ServiceMainFragment frag = new ServiceMainFragment();
+    public static ServiceAvailibilityFragment newInstance(){
+        ServiceAvailibilityFragment frag = new ServiceAvailibilityFragment();
         return frag;
     }
+
 
 }
