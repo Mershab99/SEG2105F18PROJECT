@@ -19,7 +19,8 @@
         <activity android:name=".WelcomeScreen" />
         <activity
             android:name=".AdminActivity"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".ServiceActivity"></activity>
     </application>
 
 </manifest>

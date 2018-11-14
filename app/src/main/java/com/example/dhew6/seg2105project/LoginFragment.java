@@ -90,11 +90,19 @@ public class LoginFragment extends Fragment {
                 } else {
                     int validUser = myDB.validateLogin(usernameText, passwordText);
                     if (validUser == 1) {
-                        Toast.makeText(getActivity(), "Welcome", Toast.LENGTH_LONG).show();
-                        Intent sendMessage = new Intent(getActivity(), WelcomeScreen.class);
-                        sendMessage.putExtra("loginUsernameEditText", usernameText);
-                        getActivity().finish();
-                        startActivity(sendMessage);
+                        if(myDB.getUser(usernameText).getType().equals("Service Provider")) {
+                            Toast.makeText(getActivity(), "Welcome", Toast.LENGTH_LONG).show();
+                            Intent sendMessage = new Intent(getActivity(), ServiceActivity.class);
+                            sendMessage.putExtra("loginUsernameEditText", usernameText);
+                            getActivity().finish();
+                            startActivity(sendMessage);
+                        }else{
+                            Toast.makeText(getActivity(), "Welcome", Toast.LENGTH_LONG).show();
+                            Intent sendMessage = new Intent(getActivity(), WelcomeScreen.class);
+                            sendMessage.putExtra("loginUsernameEditText", usernameText);
+                            getActivity().finish();
+                            startActivity(sendMessage);
+                        }
                     } else if (validUser == -1) {
                         usernameEditText.setText("");
                         passwordEditText.setText("");

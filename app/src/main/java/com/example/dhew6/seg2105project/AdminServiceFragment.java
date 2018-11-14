@@ -1,6 +1,5 @@
 package com.example.dhew6.seg2105project;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;

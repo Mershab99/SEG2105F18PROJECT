@@ -1,8 +1,6 @@
 package com.example.dhew6.seg2105project;
 
 import android.content.Intent;
-import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -12,38 +10,25 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-public class AdminActivity extends AppCompatActivity {
+public class ServiceActivity extends AppCompatActivity {
 
-    FragmentPagerAdapter adapterViewPager;
     ViewPager viewPager;
-    ConstraintLayout layout;
+    MyPagerAdapter adapterViewPager;
 
-    /**
-     *
-     *
-     *
-     * @param {Bundle} savedInstanceState -
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin);
+        setContentView(R.layout.activity_service);
 
-        layout = findViewById(R.id.layout);
-        viewPager = findViewById(R.id.viewPager);
+        viewPager = findViewById(R.id.viewPagerService);
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapterViewPager);
         viewPager.setCurrentItem(1);
 
-        Snackbar snackbar = Snackbar.make(findViewById(R.id.myCoordinatorLayout), "Swipe left and right for other screens!", 5000);
-        snackbar.show();
-
     }
 
     /**
-     *
      * @param menu
      * @return boolean
      */
@@ -55,7 +40,6 @@ public class AdminActivity extends AppCompatActivity {
     }
 
     /**
-     *
      * called when and item from OptionsItem is selected; a param MenuItem item is provided to define the
      *
      * @param item
@@ -79,22 +63,22 @@ public class AdminActivity extends AppCompatActivity {
     /**
      *
      */
-    private class MyPagerAdapter extends FragmentPagerAdapter{
+    private class MyPagerAdapter extends FragmentPagerAdapter {
         /**
          * calls the parent class FragmentPagerAdapter
          *
          * @param fm
          */
-        public MyPagerAdapter(FragmentManager fm){
+        public MyPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
         /**
-         *  returns the fragment associated to one of two positions
-         *  1 - AdminsServiceFragment
-         *  2 - AdminUserFragment
-         *
-         *  this method is easily scalable for more fragments
+         * returns the fragment associated to one of two positions
+         * 1 - AdminsServiceFragment
+         * 2 - AdminUserFragment
+         * <p>
+         * this method is easily scalable for more fragments
          *
          * @param position - integer position
          * @return
@@ -103,23 +87,25 @@ public class AdminActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return AdminServiceFragment.newInstance();
+                    return ServiceMainFragment.newInstance();
                 case 1:
-                    return AdminUserFragment.newInstance();
+                    return ServiceProfileFragment.newInstance();
+                case 2:
+                    return ServiceAvailibilityFragment.newInstance();
             }
             return null;
         }
 
         /**
          * returns the count of Fragments
-         *
+         * <p>
          * this method is easily scalable for more fragments
          *
          * @return {int}
          */
         @Override
         public int getCount() {
-            return 2;
+            return 3;
         }
     }
 

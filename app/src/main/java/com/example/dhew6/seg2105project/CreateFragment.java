@@ -95,6 +95,7 @@ public class CreateFragment extends Fragment {
      * NOTE: in Canada you can have numbers in your name, so we do not need to check for numbers in name.
      */
     public void onCreateButtonClick(){
+
         createAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,14 +129,18 @@ public class CreateFragment extends Fragment {
                         //If it is valid it creates a user of the specific type4
                         if(type.equals("Home Owner")){
                             myDB.createUser(fullname,username,password,email,User.HomeOwner);
+                            Intent sendMessage = new Intent(getActivity(), WelcomeScreen.class);
+                            sendMessage.putExtra("loginUsernameEditText", username);
+                            getActivity().finish();
+                            startActivity(sendMessage);
                         }
                         else if(type.equals("Service Provider")){
                             myDB.createUser(fullname,username,password,email,User.ServiceProvider);
+                            Intent sendMessage = new Intent(getActivity(), ServiceActivity.class);
+                            sendMessage.putExtra("loginUsernameEditText", username);
+                            getActivity().finish();
+                            startActivity(sendMessage);
                         }
-                        Intent sendMessage = new Intent(getActivity(), WelcomeScreen.class);
-                        sendMessage.putExtra("loginUsernameEditText", username);
-                        getActivity().finish();
-                        startActivity(sendMessage);
                     }
                 }
             }
