@@ -12,16 +12,18 @@
 
         <LinearLayout
             android:id="@+id/serviceAvailParentLayout1"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginTop="284dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:orientation="horizontal"
             android:weightSum="4"
+            app:layout_constraintBottom_toTopOf="@+id/serviceAvailParentLayout2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.596"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/roleServiceHeader1">
 
             <LinearLayout
                 android:id="@+id/mondayLayout"
@@ -131,12 +133,17 @@
 
         <LinearLayout
             android:id="@+id/serviceAvailParentLayout2"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="80dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
             android:orientation="horizontal"
             android:weightSum="3"
-            tools:layout_editor_absoluteX="132dp"
-            tools:layout_editor_absoluteY="563dp">
+            app:layout_constraintBottom_toTopOf="@+id/serviceAvailEditButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/serviceAvailParentLayout1">
 
             <LinearLayout
                 android:id="@+id/fridayLayout"
@@ -254,6 +261,45 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/nameServiceHeader1" />
+
+        <Button
+            android:id="@+id/serviceAvailEditButton"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="Edit/Add"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/button_shape"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="13dp"
+            android:background="@drawable/spinner_shape"
+            app:layout_constraintBottom_toTopOf="@+id/serviceAvailEditButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/serviceAvailParentLayout2">
+
+            <Spinner
+                android:id="@+id/selectDaySpinner"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:paddingBottom="10dp" />
+        </RelativeLayout>
 
 
     </android.support.constraint.ConstraintLayout>
