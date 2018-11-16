@@ -120,15 +120,15 @@ public class ServiceProfileFragment extends Fragment {
             phone = sp.getPhone();
             licensed = sp.isLicensed();
 
-        }
+            companyEditText.setText(company);
+            addressTextView.setText(address);
+            descriptionTextView.setText(desc);
+            phoneEditText.setText(phone);
+            licenseSwitch.setChecked(licensed);
+            if(licensed) {
+                licenseSwitch.setText("Licensed");
+            }
 
-        companyEditText.setText(company);
-        addressTextView.setText(address);
-        descriptionTextView.setText(desc);
-        phoneEditText.setText(phone);
-        licenseSwitch.setChecked(licensed);
-        if(licensed){
-            licenseSwitch.setText("Licensed");
         }
         nameHeader.setText(name);
         roleHeader.setText(role);

@@ -1,10 +1,11 @@
 package com.example.dhew6.seg2105project;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ServiceProvider extends User{
 
-    private ArrayList<String> time; //available time slots
+    private HashMap<String, ArrayList<String>> timeMap; //available time slots
     private String address;
     private String phone;
     private String desc;
@@ -63,11 +64,11 @@ public class ServiceProvider extends User{
         return "Service Provider";
     }
 
-    public ArrayList<String> getTime() {
-        return time;
+    public HashMap<String, ArrayList<String>> getTimeMap() {
+        return timeMap;
     }
 
-    public void setTime(ArrayList<String> time) {
-        this.time = time;
+    public void setTimeMap(HashMap<String, ArrayList<String>> timeMap) {
+        this.timeMap = timeMap;
     }
 }
