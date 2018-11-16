@@ -6,6 +6,7 @@ import java.util.HashMap;
 public class ServiceProvider extends User{
 
     private HashMap<String, ArrayList<String>> timeMap; //available time slots
+    private ArrayList<Service> services;
     private String address;
     private String phone;
     private String desc;
@@ -14,6 +15,14 @@ public class ServiceProvider extends User{
 
     public ServiceProvider(String name, String username, String password, String email) {
         super(name, username, password, email);
+    }
+
+    public ArrayList<Service> getServices() {
+        return services;
+    }
+
+    public void setServices(ArrayList<Service> services) {
+        this.services = services;
     }
 
     public String getAddress() {
@@ -71,4 +80,6 @@ public class ServiceProvider extends User{
     public void setTimeMap(HashMap<String, ArrayList<String>> timeMap) {
         this.timeMap = timeMap;
     }
+
+
 }

@@ -1,5 +1,7 @@
 package com.example.dhew6.seg2105project;
 
+import java.util.Objects;
+
 public class Service {
 
     private String name;
@@ -32,4 +34,18 @@ public class Service {
         this.rate = rate;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Service service = (Service) o;
+        return Double.compare(service.rate, rate) == 0 &&
+                Objects.equals(name, service.name);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(name, rate);
+    }
 }
