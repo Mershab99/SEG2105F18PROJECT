@@ -1,5 +1,6 @@
 package com.example.dhew6.seg2105project;
 
+import org.junit.After;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -10,10 +11,6 @@ import static org.junit.Assert.assertEquals;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 public class UserTests {
-    @Test
-    public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
-    }
     User user = new User("TestUser", "TestUsername","testpassword1234", "testemail@email.com");
 
     @Test
@@ -38,9 +35,13 @@ public class UserTests {
         user.setEmail("newemail@email.com");
         user.setName("NewUser");
         user.setUsername("NewUsername");
-        assertEquals("TestUser", user.getName());
+        assertEquals("NewUser", user.getName());
         assertEquals("NewUsername", user.getUsername());
         assertEquals("newemail@email.com", user.getEmail());
         assertEquals("newpassword1234", user.getPassword());
+    }
+    @After
+    public void after(){
+        System.out.println("finished running User Tests");
     }
 }
