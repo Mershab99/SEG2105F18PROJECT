@@ -167,7 +167,7 @@ public class ServiceProfileFragment extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     licensed = true;
-                    licenseSwitch.setText("Lisenced");
+                    licenseSwitch.setText("Licensed");
                 } else if (!isChecked) {
                     licensed = false;
                     licenseSwitch.setText("No License");
