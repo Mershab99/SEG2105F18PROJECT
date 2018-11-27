@@ -129,7 +129,7 @@ public class CreateFragment extends Fragment {
                         //If it is valid it creates a user of the specific type4
                         if(type.equals("Home Owner")){
                             myDB.createUser(fullname,username,password,email,User.HomeOwner);
-                            Intent sendMessage = new Intent(getActivity(), WelcomeScreen.class);
+                            Intent sendMessage = new Intent(getActivity(), HomeOwnerActivity.class);
                             sendMessage.putExtra("loginUsernameEditText", username);
                             getActivity().finish();
                             startActivity(sendMessage);

@@ -20,7 +20,8 @@
         <activity
             android:name=".AdminActivity"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".ServiceActivity"></activity>
+        <activity android:name=".ServiceActivity" />
+        <activity android:name=".HomeOwnerActivity"></activity>
     </application>
 
 </manifest>

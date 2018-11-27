@@ -121,6 +121,7 @@ public class ServiceMainFragment extends Fragment {
             sp.setDesc(temp.getDesc());
             sp.setPhone(temp.getPhone());
             sp.setTimeMap(temp.getTimeMap());
+            sp.setRating(temp.getRating());
 
         }
 

@@ -98,7 +98,7 @@ public class LoginFragment extends Fragment {
                             startActivity(sendMessage);
                         }else{
                             Toast.makeText(getActivity(), "Welcome", Toast.LENGTH_LONG).show();
-                            Intent sendMessage = new Intent(getActivity(), WelcomeScreen.class);
+                            Intent sendMessage = new Intent(getActivity(), HomeOwnerActivity.class);
                             sendMessage.putExtra("loginUsernameEditText", usernameText);
                             getActivity().finish();
                             startActivity(sendMessage);
