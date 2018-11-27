@@ -325,7 +325,7 @@ public class ServiceAvailibilityFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-                alert.setTitle("Delete Time?");
+                alert.setTitle("Edit Time?");
                 alert.setMessage("Are you sure you want to edit this time slot?");
                 alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override

@@ -112,6 +112,7 @@ public class ServiceMainFragment extends Fragment {
 
         //address, phone, desc, licensed, company
         ServiceProvider temp = getFromSharedPreferences();
+
         if (temp != null) {
 
             sp.setServices(temp.getServices());
@@ -121,7 +122,6 @@ public class ServiceMainFragment extends Fragment {
             sp.setDesc(temp.getDesc());
             sp.setPhone(temp.getPhone());
             sp.setTimeMap(temp.getTimeMap());
-            sp.setRating(temp.getRating());
 
         }
 

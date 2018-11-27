@@ -113,6 +113,7 @@ public class ServiceProfileFragment extends Fragment {
             sp.setAddress(temp.getAddress());
             sp.setDesc(temp.getDesc());
             sp.setPhone(temp.getPhone());
+            sp.setRating(temp.getRating()[0], temp.getRating()[1]);
 
             company = sp.getCompany();
             address = sp.getAddress();

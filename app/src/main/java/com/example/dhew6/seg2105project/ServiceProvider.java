@@ -7,7 +7,7 @@ public class ServiceProvider extends User{
 
     private HashMap<String, ArrayList<String>> timeMap; //available time slots
     private ArrayList<Service> services;
-    private int[] rating;
+    private String[] rating;
     private String address;
     private String phone;
     private String desc;
@@ -16,7 +16,9 @@ public class ServiceProvider extends User{
 
     public ServiceProvider(String name, String username, String password, String email) {
         super(name, username, password, email);
-        rating = new int[0];
+        rating = new String[2];
+        rating[0] = "No Ratings";
+        rating[1] = "No Comments";
     }
 
     public ArrayList<Service> getServices() {
@@ -83,11 +85,12 @@ public class ServiceProvider extends User{
         this.timeMap = timeMap;
     }
 
-    public int[] getRating() {
+    public String[] getRating() {
         return rating;
     }
 
-    public void setRating(int[] rating) {
-        this.rating = rating;
+    public void setRating(String number, String comment) {
+        this.rating[0] = number;
+        this.rating[1] = comment;
     }
 }
