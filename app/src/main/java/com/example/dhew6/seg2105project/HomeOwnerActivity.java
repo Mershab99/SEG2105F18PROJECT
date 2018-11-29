@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -44,6 +45,7 @@ public class HomeOwnerActivity extends AppCompatActivity {
     /**
      * run upon the selection of an options menu
      * has a MenuItem as a parameter that is what item was selected
+     *
      * @param item
      * @return
      */
@@ -89,6 +91,8 @@ public class HomeOwnerActivity extends AppCompatActivity {
             switch (position) {
                 case 0:
                     return HomeOwnerMainFragment.newInstance();
+                case 1:
+                    return HomeOwnerBookingFragment.newInstance();
             }
             return null;
         }
@@ -102,7 +106,7 @@ public class HomeOwnerActivity extends AppCompatActivity {
          */
         @Override
         public int getCount() {
-            return 1;
+            return 2;
         }
     }
 

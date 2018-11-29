@@ -1,16 +1,22 @@
 package com.example.dhew6.seg2105project;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -32,6 +38,7 @@ public class HomeOwnerMainFragment extends Fragment {
     TextView nameHeader, roleHeader, contentsHeader;
     Spinner weekdaySpinner, searchTypeSpinner;
     ArrayList<ServiceProvider> spList;
+    ArrayList<String> spUsernameList;
     ListView listView, contentsListView;
     final int SEARCH_NAME = 0;
     final int SEARCH_TIME = 1;
@@ -39,7 +46,8 @@ public class HomeOwnerMainFragment extends Fragment {
     int searchType;
     CustomAdapter customAdapter;
     ArrayAdapter arrayAdapter, contentsArrayAdapter;
-
+    EditText searchEditText;
+    ViewPager viewPager;
 
     public HomeOwnerMainFragment() {
         // Required empty public constructor
@@ -70,12 +78,21 @@ public class HomeOwnerMainFragment extends Fragment {
         listView = getView().findViewById(R.id.hoListView);
         contentsHeader = getView().findViewById(R.id.hoContentsTextView);
         contentsListView = getView().findViewById(R.id.contentHOTextView);
+        searchEditText = getView().findViewById(R.id.hoSearchEditText);
+        viewPager = getActivity().findViewById(R.id.viewPagerHome);
 
         getInfo();
 
         searchType = SEARCH_NAME;
 
         searchSpinnerListener();
+        populateWeekdaySpinner();
+        populateSearchTypeSpinner();
+        weekdaySpinnerListener();
+        updateListView();
+        mainLVListener();
+        search();
+        contentsLVClickListener();
 
     }
 
@@ -96,7 +113,7 @@ public class HomeOwnerMainFragment extends Fragment {
 
         ArrayList<User> userList = myDB.displayAllUsers();
         spList = new ArrayList<>();
-        System.out.println(userList);
+        spUsernameList = new ArrayList<>();
 
         for (int i = 0; i < userList.size(); i++) {
 
@@ -104,16 +121,11 @@ public class HomeOwnerMainFragment extends Fragment {
                 String user = userList.get(i).getUsername();
                 ServiceProvider sp = getFromSharedPreferences(user);
                 spList.add(sp);
-                System.out.println(spList);
+                spUsernameList.add(user);
+
             }
 
         }
-
-        populateWeekdaySpinner();
-        populateSearchTypeSpinner();
-        weekdaySpinnerListener();
-        updateListView();
-        mainLVListener();
 
     }
 
@@ -236,7 +248,7 @@ public class HomeOwnerMainFragment extends Fragment {
                     for (int i = 0; i < spList.size(); i++) {
                         ServiceProvider sp = spList.get(i);
                         ArrayList<String> times = sp.getTimeMap().get(weekday);
-                        if(times.contains(s)){
+                        if (times.contains(s)) {
                             list.add(sp.getName() + " - " + sp.getCompany() + " - " + sp.getPhone());
                         }
                     }
@@ -244,6 +256,25 @@ public class HomeOwnerMainFragment extends Fragment {
                     contentsListView.setAdapter(contentsArrayAdapter);
                     contentsArrayAdapter.notifyDataSetChanged();
                 }
+
+                if (searchType == SEARCH_RATING) {
+
+                    String s = arrayAdapter.getItem(position).toString();
+                    ArrayList<String> list = new ArrayList<>();
+
+                    for (int i = 0; i < spList.size(); i++) {
+
+                        ServiceProvider sp = spList.get(i);
+                        if (sp.getRating()[0].equals(s)) {
+                            list.add(sp.getName() + " - " + sp.getCompany() + " - " + sp.getPhone());
+                        }
+
+                    }
+                    contentsArrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, list);
+                    contentsListView.setAdapter(contentsArrayAdapter);
+                    contentsArrayAdapter.notifyDataSetChanged();
+                }
+
             }
         });
 
@@ -275,11 +306,39 @@ public class HomeOwnerMainFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 searchType = position;
+                contentsArrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, new ArrayList<>());
+                contentsListView.setAdapter(contentsArrayAdapter);
+                contentsArrayAdapter.notifyDataSetChanged();
                 updateContents();
+
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+    }
+
+    public void contentsLVClickListener() {
+
+        contentsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                String spUsername = spUsernameList.get(position);
+                String hoUsername = ho.getUsername();
+                String weekday = weekdaySpinner.getSelectedItem().toString();
+                SharedPreferences sharedPreferences;
+                sharedPreferences = getActivity().getSharedPreferences("preferences", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("hoUsername", hoUsername);
+                editor.putString("spUsername", spUsername);
+                editor.putString("spWeekday", weekday);
+                editor.commit();
+                viewPager.setCurrentItem(1);
+                Toast.makeText(getActivity(), "Swipe to get back to the main screen.", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -302,6 +361,32 @@ public class HomeOwnerMainFragment extends Fragment {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+    }
+
+    private void search() {
+
+        searchEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (searchType == SEARCH_NAME) {
+                    customAdapter.filter(s.toString());
+                } else {
+                    arrayAdapter.getFilter().filter(s.toString());
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
 
             }
         });
