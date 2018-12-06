@@ -8,11 +8,11 @@ UML Diagram for Deliverable 4: https://imgur.com/a/TMTKr2v
 APK Device Used: Nexus 5
 
 Group Members:
-Mershab Arafat,
-David Hew-Wing,
-Keith Tang,
-Kyle Pinkerton,
-Marc Frame
+Mershab Arafat 300027272,
+David Hew-Wing 300013907,
+Keith Tang 300014176,
+Kyle Pinkerton 8122569,
+Marc Frame 300022543
 
 
 
